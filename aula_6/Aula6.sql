@@ -15,3 +15,5 @@ WHERE Produtos.importado = 'S'
 ORDER BY Produtos.titulo;
 
 SELECT COUNT (*) FROM ESTADOS;
+
+SELECT COUNT (*) FROM CIDADES WHERE UF = 'SP';
