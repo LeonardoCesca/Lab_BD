@@ -1,0 +1,16 @@
+INSERT INTO ESTADOS VALUES ('BB','EST bb', 'BB');
+
+SELECT * FROM ESTADOS;
+
+SELECT EST.nome, CID.nome FROM ESTADOS EST LEFT OUTER JOIN CIDADES CID ON EST.UF = CID.UF
+
+SELECT COUNT (*) FROM CIDADES;
+
+SELECT AUTORES.nome, Produtos.titulo 
+FROM Produtos INNER JOIN Autores_Produtos
+ON Produtos.cod_Produto = autores_Produtos.cod_Produto
+INNER JOIN AUTORES
+ON AUTORES_PRODUTOS.COD_AUTOR = AUTORES.COD_AUTOR
+WHERE Produtos.importado = 'S'
+ORDER BY Produtos.titulo;
+
