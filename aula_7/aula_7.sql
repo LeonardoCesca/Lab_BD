@@ -64,10 +64,13 @@ VALUES( 15, 'Papel A4' ,19 ,'S');
 INSERT INTO PRODS
 VALUES( 16, 'Scanner' ,199 ,'P'); 
 
+
 select * from prods;
 
+--a)Quantos produtos existem na tabela PRODS? 
 select count(*) from prods;
 
+--b) Quantos tipos de produtos existem na tabela PRODS? 
 select tipo, count(*) qtd_tipo
 from prods
 group by tipo 
@@ -77,3 +80,35 @@ select avg(preco) from prods;
 
 select preco from prods;
 
+--d) Qual a média de preço de todos os produtos? 
+select tipo, avg(preco)
+from prods
+group by tipo
+order by tipo;
+
+ALTER TABLE PRODS ADD (usuario NUMBER(1) NULL);
+UPDATE PRODS
+SET usuario = 1
+WHERE codigo IN (10,12,13,14);
+
+UPDATE PRODS
+SET usuario = 2
+WHERE usuario IS NULL;
+
+SELECT tipo, usuario, AVG(preco)
+FROM PRODS
+GROUP BY tipo, usuario
+ORDER BY tipo, usuario; 
+
+UPDATE PRODS
+ SET usuario = 2
+ WHERE codigo = 14;
+ 
+ UPDATE PRODS
+ SET usuario = NULL
+ WHERE codigo = 13;
+
+SELECT tipo, usuario, AVG(preco)
+FROM PRODS
+GROUP BY tipo, usuario
+ORDER BY tipo, usuario ;
