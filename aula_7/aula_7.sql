@@ -66,4 +66,14 @@ VALUES( 16, 'Scanner' ,199 ,'P');
 
 select * from prods;
 
+select count(*) from prods;
+
+select tipo, count(*) qtd_tipo
+from prods
+group by tipo 
+order by tipo;
+
+select avg(preco) from prods;
+
+select preco from prods;
 
