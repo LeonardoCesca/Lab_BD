@@ -1,0 +1,28 @@
+SELECT
+ CASE nivel_privilegio
+ WHEN 2 THEN 'BAIXO'
+ WHEN 3 THEN 'MÉDIO-BAIXO'
+ WHEN 4 THEN 'MÉDIO'
+ WHEN 5 THEN 'MÉDIO-ALTO'
+ WHEN 6 THEN 'ALTO'
+ ELSE 'OUTROS'
+ END
+FROM ADMINISTRADORES;
+
+SELECT * FROM ADMINISTRADORES;
+
+SELECT COUNT(*) FROM ADMINISTRADORES;
+
+SELECT
+ CASE
+ WHEN nivel_privilegio >= 1
+ AND nivel_privilegio < 5 THEN 'BAIXO'
+
+ WHEN nivel_privilegio >= 5
+ AND nivel_privilegio < 7 THEN 'MÉDIO'
+ WHEN nivel_privilegio >= 7
+ AND nivel_privilegio < 10 THEN 'ALTO'
+ ELSE 'OUTROS'
+ END
+FROM ADMINISTRADORES; 
+
