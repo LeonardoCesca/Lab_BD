@@ -6,7 +6,12 @@ join enderecos using (cod_cidade)
 group by uf;
 
 --EC2.   Qual a quantidade de clientes de cada estado?
-
+select uf, count(distinct cod_cliente)
+from estados join cidades using (uf)
+join enderecos using (cod_cidade)
+join clientes_enderecos using (cod_endereco)
+join clientes using (cod_cliente)
+group by uf;
 
 --EC3.   Qual o ranking de estados por quantidade de clientes, ou seja, em ordem decrescente de quantidade de clientes?
 
