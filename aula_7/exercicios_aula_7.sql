@@ -34,6 +34,13 @@ order by count (distinct cod_cliente) desc;
 
 --EC5.   Qual a quantidade de pedidos por região?
 
+select regiao, count(distinct num_pedido)
+from estados join cidades using (uf)
+join enderecos using (cod_cidade)
+join clientes_enderecos using (cod_endereco)
+join pedidos using (cod_cliente,cod_endereco)
+group by regiao
+order by count(num_pedido) desc;
 
 
 --EC6.   Qual a quantidade de pedidos por ano e por região, considerando apenas os pedidos feitos nos anos de 2000 até 2004?
