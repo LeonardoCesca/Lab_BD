@@ -100,3 +100,10 @@ from pedidos join pedidos_produtos using (num_pedido)
 group by num_pedido;
 
 --EC12.  Qual o valor médio dos pedidos por estado?
+select uf, sum(quantidade * valor_unitario) / count(distinct num_pedido)
+from estados join cidades using(uf)
+join enderecos using(cod_cidade)
+join clientes_enderecos using(cod_endereco)
+join pedidos using(cod_cliente,cod_endereco)
+join pedidos_produtos using(num_pedido)
+group by uf;
