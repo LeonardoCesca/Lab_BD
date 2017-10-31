@@ -46,21 +46,39 @@ order by count(num_pedido) desc;
 --EC6.   Qual a quantidade de pedidos por ano e por região, considerando apenas os pedidos feitos nos anos de 2000 até 2004?
 select to_char(data_emissao,'yyyy'), regiao, count(num_pedido)
 from estados join cidades using(uf)
-             join enderecos using(cod_cidade)
-             join clientes_enderecos using(cod_endereco)
-             join pedidos using(cod_cliente,cod_endereco)
+join enderecos using(cod_cidade)
+join clientes_enderecos using(cod_endereco)
+join pedidos using(cod_cliente,cod_endereco)
 where to_char(data_emissao,'yyyy') >= '2000' and to_char(data_emissao,'yyyy') <= '2004' 
 group by to_char(data_emissao,'yyyy'), regiao
 order by to_char(data_emissao,'yyyy'), regiao;
 
 --EC7.   Qual o valor total gasto por cliente, ordenado em ordem decrescente de valor total?
-
-
+select cod_cliente, sum(quantidade*valor_unitario)
+from estados join cidades using (uf)
+join enderecos using (cod_cidade) 
+join clientes_enderecos using (cod_endereco)
+join pedidos using (cod_cliente, cod_endereco)
+join pedidos_produtos using (num_pedido)
+group by cod_cliente
+order by sum(quantidade*valor_unitario) desc;
 --EC8.   Qual o valor total gasto por cliente, ordenado em ordem decrescente de valor total, considerando apenas os clientes do Rio Grande do Sul?
-
+select cod_cliente, sum(quantidade*valor_unitario)
+from estados join cidades using (uf)
+join enderecos using (cod_cidade)
+join clientes_enderecos using (cod_endereco)
+join pedidos using (cod_cliente, cod_endereco)
+join pedidos_produtos using (num_pedido)
+where uf = 'RS'
+group by cod_cliente
+order by sum(quantidade*valor_unitario) desc;
 
 --EC9.   Qual o valor total vendido por autor?
-
+select cod_autor, sum(quantidade*valor_unitario)
+from autores join autores_produtos using (cod_autor)
+join produtos using (cod_produto)
+join pedidos_produtos using (cod_produto)
+group by cod_autor;
 
 --EC10.  Qual o valor médio faturado com as vendas por produto?
 
