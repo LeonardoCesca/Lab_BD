@@ -62,6 +62,9 @@ join pedidos using (cod_cliente, cod_endereco)
 join pedidos_produtos using (num_pedido)
 group by cod_cliente
 order by sum(quantidade*valor_unitario) desc;
+
+--The SUM() function returns the total sum of a numeric column. --
+
 --EC8.   Qual o valor total gasto por cliente, ordenado em ordem decrescente de valor total, considerando apenas os clientes do Rio Grande do Sul?
 select cod_cliente, sum(quantidade*valor_unitario)
 from estados join cidades using (uf)
@@ -73,6 +76,8 @@ where uf = 'RS'
 group by cod_cliente
 order by sum(quantidade*valor_unitario) desc;
 
+--The SUM() function returns the total sum of a numeric column.--
+
 --EC9.   Qual o valor total vendido por autor?
 select cod_autor, sum(quantidade*valor_unitario)
 from autores join autores_produtos using (cod_autor)
@@ -80,10 +85,18 @@ join produtos using (cod_produto)
 join pedidos_produtos using (cod_produto)
 group by cod_autor;
 
---EC10.  Qual o valor médio faturado com as vendas por produto?
+--The SUM() function returns the total sum of a numeric column. --
 
+--EC10.  Qual o valor médio faturado com as vendas por produto? 
+select cod_produto, avg( quantidade * valor_unitario )
+from produtos join pedidos_produtos using( cod_produto )
+group by cod_produto;
+
+-- The AVG() function returns the average value of a numeric column. --
 
 --EC11.  Qual o valor total de cada pedido?
-
+select num_pedido, sum(quantidade * valor_unitario)
+from pedidos join pedidos_produtos using (num_pedido)
+group by num_pedido;
 
 --EC12.  Qual o valor médio dos pedidos por estado?
